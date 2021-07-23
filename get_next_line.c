@@ -6,11 +6,12 @@
 /*   By: hmochida <hmochida@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 16:57:58 by hmochida          #+#    #+#             */
-/*   Updated: 2021/07/23 18:18:20 by hmochida         ###   ########.fr       */
+/*   Updated: 2021/07/23 20:18:25 by hmochida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include <stdio.h>
 
 char	*get_next_line(int fd)
 {
@@ -35,11 +36,12 @@ char	*get_next_line(int fd)
 					temp = ft_substr(oflw, (npos - oflw) + 1, ft_strlen(oflw) - (npos - oflw)); //copia da posição de \n +1 até o final da string
 					free (oflw);
 					oflw = ft_strdup(temp);
+					free (temp);
 					return (ret);
 					}
 		}
 		i = read (fd, buf, BUFFER_SIZE);
-		buf[BUFFER_SIZE] = '\0';
+		buf[i] = '\0'; // era buf[BUFFER_SIZE]
 		if (!oflw &&  i)
 			oflw = ft_strdup(buf);
 		else if (i)
