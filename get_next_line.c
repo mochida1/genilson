@@ -6,7 +6,7 @@
 /*   By: hmochida <hmochida@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 16:57:58 by hmochida          #+#    #+#             */
-/*   Updated: 2021/07/23 01:50:42 by hmochida         ###   ########.fr       */
+/*   Updated: 2021/07/23 18:18:20 by hmochida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,38 +25,41 @@ char	*get_next_line(int fd)
 	//checagem de erros antes;
 	i = 1;
 	while (i){
-		if (ft_strlen(oflw))
+		if (ft_strlen(oflw))  //se existir oflw
 		{
 			npos = ft_strchr(oflw, 10);
-				if (npos)
+				if (npos)					//se existir \n bota até npos como string em ret. atualiza oflw. retorna ret.
 					{
 					ret = ft_substr(oflw, 0, (npos - oflw) + 1);
-					*(npos + 1) = '\0';
-					temp = ft_substr(oflw, (npos - oflw) + 1, ft_strlen(oflw) - (npos - oflw)); //copia da posição de \n até o final da string
+					//*(npos + 1) = '\0';
+					temp = ft_substr(oflw, (npos - oflw) + 1, ft_strlen(oflw) - (npos - oflw)); //copia da posição de \n +1 até o final da string
 					free (oflw);
-					oflw = temp;
+					oflw = ft_strdup(temp);
 					return (ret);
 					}
 		}
 		i = read (fd, buf, BUFFER_SIZE);
 		buf[BUFFER_SIZE] = '\0';
-				if (!oflw)
+		if (!oflw &&  i)
 			oflw = ft_strdup(buf);
-		else
+		else if (i)
 		{
 			temp = ft_strjoin (oflw, buf);
 			free(oflw);
 			oflw = ft_strdup(temp);
+			free(temp);
+			temp = 0;
 		}
 
 	}
-	/*
-	if (oflw)
+
+	if (oflw && !i)
+	{
 		ret = ft_strdup(oflw);
-		//free(oflw);
+		free(oflw);
 		oflw = NULL;
 		return(ret);
-	*/
+	}
 	return (0);
 }
 
