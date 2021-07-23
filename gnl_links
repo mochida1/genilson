@@ -1,0 +1,119 @@
+https://github.com/520luigi/Get_Next_Line/blob/master/get_next_line.c
+
+
+This function appends a single line into our line variable. We do this by
+finding the length of the line. If at index len, the character is a newline,
+we save the string into line up to the length found. Then we readjust the
+stored data (**s) by creating a temporary string that stored the rest of data
+after the newline. We free the stored data to update it to the current
+address because we already append a line from it. This is done by freeing *s
+and setting it equal to the temporary string that stored the remaining data.
+At any point when we reach the end of the file, we free the memory used to
+track our location in *s because it is not needed anymore.
+
+
+This is a helper function created to output the results after all the other
+cases are taken care of in get_next_line. For example, if ret is less than 0,
+then return -1 since an error occurred. If the reading is completed, return a
+0. Else, go to appendline function to return 1 and save the line read at the
+current address of the static variable stored.
+
+The get_next_line function reads a file and returns the line ending with a
+newline character from a file descriptor. A static variable is used, so that
+whenever get_next_line is called, it remembers the previous function call.
+When get_next_line is first called, we check to see if our static variable
+**s is empty. If it is, we allocate memory for it using our buff string.
+In the loop, we will continue to read more of the line and join them together
+using a temporary string. This temporary string will replace the stored data
+each iteration so that we can keep track of how much is read and delete
+the previous stored data. This is needed because we are only reading so many
+n-bytes at a time decided by our BUFF_SIZE. If we read at each iteration
+without freeing memory, then we would have memory leaks. The loop breaks when
+a newline is encountered. Finally, we call output function to check what
+should be returned.
+
+/*---------------------------------------------------------------------------*/
+
+https://github.com/jraleman/42_get_next_line/blob/master/src/get_next_line.c
+
+Allocates sufficient memory for a copy of the string s1, does the copy,
+and returns a pointer to it.
+Allocates with malloc() and returns a “fresh” string ending with ’\0’,
+result of the concatenation of s1 and s2. If the allocation fails the
+function returns NULL.
+Verify if whatever is in the stack, has a newline. If it doesn't, returns
+a zero (0) to indicate that it's not valid. If there is a newline, we make a
+copy of the stack into the line, and we copied whatever was in the stack
+before, back to the stack (with the temporary stack that we created).
+Reads into the heap, from the file descriptors, a specific number of bytes
+defined by the BUFF_SIZE macro in the get_nex_line.h file. It's going to
+continue the reading when the return value of the read function is greater
+than zero (no errors, or if there is nothing else to read).
+If there is something in the stack, we will concatinate whatever is in
+there, with whatever is read in the heap. If no, we will just add
+whatever is in the heap into the stack. Then we will verify the stack to
+see if there is a newline. If there is, we will break from the while loop
+and force the positive ret value into a one (1), using the RET_VALUE() macro.
+This answer form SO helped me visualize the stack and heap in a better way:
+http://stackoverflow.com/a/1213360
+This is where the real shit happens.
+It first checks for errors (is the line is empty, if the number of the file
+descriptor is invalid, or if it fails to allocate the heap), so it can return
+a minus one (-1) if needed.
+If there is something in the stack (because we are using a static variable),
+we verify that there is a newline. If not, we allocate memory for the heap,
+and we read the file.
+When the reading of the file ends, we will free the heap (we're not gonna
+use it anymore), and we check for the value of ret (if it's 1 or -1, return
+that, if the stack is empty, return 0). If neither of these conditions are
+valid, we assing line to the value of the stack, free the stack, and return 1
+A good read about file descriptors:
+http://www.bottomupcs.com/file_descriptors.xhtml
+
+
+/*---------------------------------------------------------------------------*/
+
+
+Description: Write a function which returns
+a line read from a file descriptor, without the newline.
+Parameters:
+1. file descriptor for reading
+2. The value of what has been read
+Return value:
+1 : A line has been read
+0 : EOF has been reached
+-1 : An error happened
+BONUS:
+To succeed get_next_line with a single static variable.
+To be able to manage multiple file descriptor with
+your get_next_line. For example, if the file
+descriptors 3, 4 and 5 are accessible for reading,
+then you can call get_next_line once on 3,
+once on 4, once again on 3 then once on 5 etc. without
+losing the reading thread on each of the descriptors.
+
+
+```c
+#include <stdio.h>
+#include <stddef.h>
+#include <stdlib.h>
+
+int main (void)
+  {
+  int *i;
+
+  i = malloc(1*(sizeof(int)));
+  *i = 0;
+
+  if (NULL == (void *) i)
+  {
+    printf("isso nao deveria ter acontecido");
+    return(0);
+  }
+  else
+  {
+    printf("yup.");
+    return (1);
+  }
+}
+```
