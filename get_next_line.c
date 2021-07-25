@@ -24,18 +24,6 @@ static char	*oflw_upd(char *o, char *b)
 	return (o);
 }
 
-static char	*return_nl(char *o, int *i)
-{
-	char	*npos;
-	char	*ret;
-
-	npos = ft_strchr_gnl(o, 10);
-	ret = ft_substr(o, 0, (npos - o) + 1);
-	i[1] = 1;
-	npos = 0;
-	return (ret);
-}
-
 static char	*cat_next_line(char *o)
 {
 	char	*npos;
@@ -49,6 +37,19 @@ static char	*cat_next_line(char *o)
 	temp = 0;
 	npos = 0;
 	return (o);
+}
+
+static char	*return_nl(char **o, int *i)
+{
+	char	*npos;
+	char	*ret;
+
+	npos = ft_strchr_gnl(*o, 10);
+	ret = ft_substr(*o, 0, (npos - *o) + 1);
+	i[1] = 1;
+	npos = 0;
+	*o = cat_next_line(*o);
+	return (ret);
 }
 
 static char	*last_funca(char **o, int *i)
@@ -78,8 +79,7 @@ char	*get_next_line(int fd)
 	{
 		if (ft_strchr_gnl(oflw, 10))
 		{
-			ret = return_nl(oflw, i);
-			oflw = cat_next_line(oflw);
+			ret = return_nl(&oflw, i);
 			return (ret);
 		}
 		i[0] = read (fd, buf, BUFFER_SIZE);
