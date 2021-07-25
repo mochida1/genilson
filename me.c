@@ -6,7 +6,7 @@
 /*   By: hmochida <hmochida@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/22 23:30:08 by hmochida          #+#    #+#             */
-/*   Updated: 2021/07/25 17:32:01 by hmochida         ###   ########.fr       */
+/*   Updated: 2021/07/25 17:59:51 by hmochida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ int main (void)
 	free(texticulo);
 	texticulo = 0;
 	}
+
+	printf("%s",texticulo);
 
 	close(fd);
 }
