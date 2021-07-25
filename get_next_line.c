@@ -51,9 +51,9 @@ static char	*cat_next_line(char *o)
 	return (o);
 }
 
-static char *last_funca(char **o, int *i)
+static char	*last_funca(char **o, int *i)
 {
-	char *ret;
+	char	*ret;
 
 	if (i[1])
 		ret = ft_strjoin(*o, "\n");
