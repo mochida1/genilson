@@ -6,7 +6,7 @@
 /*   By: hmochida <hmochida@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/21 08:57:55 by hmochida          #+#    #+#             */
-/*   Updated: 2021/07/25 15:57:21 by hmochida         ###   ########.fr       */
+/*   Updated: 2021/07/25 19:51:59 by hmochida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	ft_strlen(const char *s)
 char	*ft_strchr_gnl(const char *s, int c)
 {
 	if (!s)
-		return(0);
+		return (0);
 	while (*s)
 	{
 		if (*s == (char)c)
