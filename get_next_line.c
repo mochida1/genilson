@@ -80,7 +80,7 @@ char	*get_next_line(int fd)
 	if ((fd < 0) || (fd > RLIMIT_NOFILE) || (BUFFER_SIZE < 1))
 		return (0);
 	i = 1;
-	while (i)
+	while (i > 0)
 	{
 		if (ft_strchr_gnl(oflw, 10))
 		{
@@ -89,9 +89,9 @@ char	*get_next_line(int fd)
 		}
 		i = read (fd, buf, BUFFER_SIZE);
 		buf[i] = '\0';
-		if (!oflw && i)
+		if (!oflw && i > 0)
 			oflw = ft_strdup(buf);
-		else if (i)
+		else if (i > 0)
 			oflw = oflw_upd(oflw, buf);
 	}
 	if (oflw && !i)

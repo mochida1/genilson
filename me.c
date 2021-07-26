@@ -20,16 +20,17 @@ int main (void)
 	char *texticulo;
 
 	fd = open("me.txt", O_RDONLY);
+	close (fd);
 
 
 	while ((texticulo = get_next_line(fd)))
 	{
-	printf("%s",texticulo);
+	printf("|%s|",texticulo);
 	free(texticulo);
 	texticulo = 0;
 	}
 
-	printf("%s",texticulo);
+	printf("&%s&",texticulo);
 
 	close(fd);
 }

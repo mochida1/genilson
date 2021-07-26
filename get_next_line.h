@@ -6,7 +6,7 @@
 /*   By: hmochida <hmochida@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/21 07:36:16 by hmochida          #+#    #+#             */
-/*   Updated: 2021/07/23 22:39:38 by hmochida         ###   ########.fr       */
+/*   Updated: 2021/07/25 21:04:48 by hmochida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 
 # include <unistd.h>
 # include <stdlib.h>
-# include <limits.h>
-# include <sys/param.h>
 # include <sys/resource.h>
 # include <fcntl.h>
 
